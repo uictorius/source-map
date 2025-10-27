@@ -1,0 +1,13 @@
+# Based on LLVM style
+BasedOnStyle: LLVM
+Language: Cpp
+IndentWidth: 4
+UseTab: Never
+BreakBeforeBraces: Stroustrup
+AllowShortIfStatementsOnASingleLine: false
+IndentCaseLabels: true
+ColumnLimit: 100
+
+# Align '*' to the right (e.g., char *ptr)
+PointerAlignment: Right
+SortIncludes: true

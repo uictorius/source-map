@@ -1,0 +1,71 @@
+# Continuous Integration (CI) Workflow Name
+name: CI Build & Lint
+
+# Triggers: When this workflow should run
+on:
+  # Run on pushes to the 'main' (or 'master') branch
+  push:
+    branches: ["main", "master"]
+  # Run on any pull request
+  pull_request:
+    branches: ["main", "master"]
+
+jobs:
+  # --- 1. Lint Job (Formatting Check) ---
+  lint:
+    name: Formatting Check
+    # Use the latest Ubuntu version
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the repository code
+      - name: 1. Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Install clang-format
+      - name: 2. Install dependencies (clang-format)
+        run: sudo apt-get update && sudo apt-get install -y clang-format
+
+      # 3. Install Node.js (for Prettier via npx)
+      - name: 3. Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # Use a recent LTS version of Node
+
+      # 4. Check C/C++ formatting
+      - name: 4. Check C/C++ formatting (clang-format)
+        run: |
+          find src/ include/ -name "*.c" -o -name "*.h" | xargs clang-format --dry-run --Werror
+
+      # 5. Check formatting for other files
+      - name: 5. Check formatting (Prettier)
+        run: |
+          npx prettier --check .
+
+  # --- 2. Build Job (Compilation) ---
+  build:
+    name: Project Build
+    # This job only runs if the 'lint' job succeeds
+    needs: lint
+    # Use the latest Ubuntu version
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the repository code
+      - name: 1. Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Install build tools (gcc, make)
+      - name: 2. Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc make
+
+      # 3. Build the project
+      - name: 3. Build (make)
+        run: make
+
+      # 4. (Optional) Verify executable creation
+      - name: 4. Verify executable
+        run: |
+          ls -l bin/source-map

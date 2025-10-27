@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    // Main package for C/C++ (IntelliSense, clang-format formatting)
+    "ms-vscode.cpptools-extension-pack",
+    // Formatting for Markdown, JSON, etc.
+    "esbenp.prettier-vscode",
+    // Support for Makefiles
+    "ms-vscode.makefile-tools"
+  ]
+}

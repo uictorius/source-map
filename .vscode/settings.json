@@ -1,0 +1,54 @@
+{
+  // --- General Formatting ---
+
+  // Enable auto-format on save
+  "editor.formatOnSave": true,
+
+  // Set Prettier as the default formatter for most files
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // --- Language-Specific Settings ---
+
+  // For C:
+  "[c]": {
+    // Use the C/C++ extension formatter (which uses your .clang-format)
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  // For C headers:
+  "[h]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  // For Makefiles:
+  "[makefile]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // For Markdown (to ensure .prettierrc is used):
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // --- Exclusions ---
+  // Hide folders from file tree and file watcher
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "build/": true,
+    "bin/": true
+  },
+
+  // Hide folders from search
+  "search.exclude": {
+    "build/": true,
+    "bin/": true
+  }
+}
